@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>元保 · 入职卡片 · 设计规格单</title>
+<style>
+  :root {
+    --deep:  #15273F;
+    --blue:  #1A3A5C;
+    --mid:   #2D5F8A;
+    --light: #E3EDF6;
+    --gold:  #C8963E;
+    --gbg:   #F8F0E0;
+    --text:  #1E293B;
+    --sub:   #64748B;
+    --faint: #94A3B8;
+    --bg:    #FFFFFF;
+    --warm:  #F8FAFC;
+    --border:#E2E8F0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,sans-serif;
+    background: #F1F5F9; color: var(--text); line-height:1.6; -webkit-font-smoothing:antialiased;
+    padding: 40px 24px;
+  }
+  .wrap { max-width:960px; margin:0 auto; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(160deg, var(--deep), var(--blue));
+    color:#fff; border-radius:8px; padding:48px 40px; margin-bottom:28px;
+    position:relative; overflow:hidden;
+  }
+  .header::after {
+    content:''; position:absolute; top:-60px; right:-60px;
+    width:240px; height:240px; background:rgba(255,255,255,.03); border-radius:50%;
+  }
+  .header h1 { font-size:30px; font-weight:800; letter-spacing:2px; }
+  .header p  { font-size:14px; color:rgba(255,255,255,.65); margin-top:6px; }
+  .header .meta { display:flex; gap:24px; font-size:12px; color:rgba(255,255,255,.4); margin-top:14px; }
+
+  /* Section */
+  .sec {
+    background:var(--bg); border-radius:8px; padding:32px 36px;
+    margin-bottom:20px; border:1px solid var(--border);
+  }
+  .sec h2 {
+    font-size:18px; font-weight:700; color:var(--blue); letter-spacing:1px;
+    padding-bottom:14px; border-bottom:2px solid var(--border); margin-bottom:20px;
+  }
+  .sec h2 span { color:var(--gold); font-weight:800; margin-right:6px; }
+
+  /* Color swatches */
+  .swatches { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
+  .swatch { border-radius:6px; overflow:hidden; border:1px solid var(--border); }
+  .swatch .sw-color { height:72px; }
+  .swatch .sw-info { padding:10px 12px; background:var(--warm); }
+  .swatch .sw-name { font-size:12px; font-weight:600; color:var(--text); }
+  .swatch .sw-hex { font-size:11px; color:var(--sub); font-family:"SF Mono","Menlo","Consolas",monospace; }
+  .swatch .sw-use  { font-size:10px; color:var(--faint); margin-top:2px; }
+
+  /* Font samples */
+  .font-sample { margin-bottom:16px; padding:16px 20px; background:var(--warm); border-radius:6px; border:1px solid var(--border); }
+  .font-sample .fs-label { font-size:10px; font-weight:600; color:var(--sub); letter-spacing:1px; margin-bottom:6px; }
+  .font-sample .fs-display { font-size:40px; font-weight:800; color:var(--blue); line-height:1.15; letter-spacing:2px; }
+  .font-sample .fs-title  { font-size:22px; font-weight:800; color:var(--blue); letter-spacing:2px; }
+  .font-sample .fs-body   { font-size:14px; color:var(--sub); line-height:1.6; margin-top:4px; }
+  .font-sample .fs-small  { font-size:10px; color:var(--faint); margin-top:4px; }
+
+  /* Spec table */
+  .spec-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+  .spec-tbl th {
+    text-align:left; padding:10px 14px; background:var(--warm); font-weight:600;
+    color:var(--sub); font-size:11px; letter-spacing:1px; border-bottom:2px solid var(--border);
+  }
+  .spec-tbl td { padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  .spec-tbl tr:last-child td { border-bottom:none; }
+
+  /* Layout preview */
+  .layout-preview {
+    display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  }
+  .layout-card {
+    background:var(--warm); border:2px dashed var(--border); border-radius:8px;
+    padding:20px; font-size:11px; color:var(--sub);
+  }
+  .layout-card .lp-title { font-weight:700; color:var(--blue); font-size:13px; margin-bottom:8px; }
+  .layout-card .lp-row { display:flex; gap:6px; margin-bottom:4px; align-items:center; }
+  .layout-card .lp-box {
+    background:var(--bg); border:1px solid var(--border); border-radius:3px;
+    padding:4px 8px; font-size:10px;
+  }
+  .lp-accent { background:var(--deep); color:#fff; border-radius:2px; padding:2px 6px; font-size:9px; }
+  .lp-gold   { background:var(--gold); color:#fff; border-radius:2px; padding:2px 6px; font-size:9px; }
+
+  /* Print specs */
+  .print-specs { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .print-card { background:var(--warm); padding:16px; border-radius:6px; border:1px solid var(--border); }
+  .print-card .pc-label { font-size:10px; font-weight:600; color:var(--sub); letter-spacing:1px; margin-bottom:4px; }
+  .print-card .pc-value { font-size:14px; font-weight:700; color:var(--blue); }
+
+  .footer { text-align:center; font-size:11px; color:var(--faint); padding:32px 0 16px; }
+
+  @media print {
+    body { background:#fff; padding:0; }
+    .sec { box-shadow:none; break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ==================== HEADER ==================== -->
+  <div class="header">
+    <h1>入职卡片 · 设计规格单</h1>
+    <p>Design Specification for Print Production</p>
+    <div class="meta">
+      <span>品牌: 元保 Yuanbao Inc.</span>
+      <span>版本: v3.0</span>
+      <span>2026-07-05</span>
+    </div>
+  </div>
+
+  <!-- ==================== PRINT SPECS ==================== -->
+  <div class="sec">
+    <h2><span>01</span>印刷参数</h2>
+    <div class="print-specs">
+      <div class="print-card"><div class="pc-label">成品尺寸</div><div class="pc-value">A5 / 148 x 210 mm</div></div>
+      <div class="print-card"><div class="pc-label">纸张</div><div class="pc-value">300g 铜版纸</div></div>
+      <div class="print-card"><div class="pc-label">印刷</div><div class="pc-value">双面四色 (CMYK)</div></div>
+      <div class="print-card"><div class="pc-label">表面工艺</div><div class="pc-value">覆哑膜</div></div>
+      <div class="print-card"><div class="pc-label">裁切出血</div><div class="pc-value">四边 3mm</div></div>
+      <div class="print-card"><div class="pc-label">首批数量</div><div class="pc-value">200 张</div></div>
+    </div>
+  </div>
+
+  <!-- ==================== COLOR PALETTE ==================== -->
+  <div class="sec">
+    <h2><span>02</span>品牌色板</h2>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="sw-color" style="background:#15273F"></div>
+        <div class="sw-info">
+          <div class="sw-name">深蓝 Deep Blue</div>
+          <div class="sw-hex">#15273F</div>
+          <div class="sw-use">深色背景 / NASDAQ 标识</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="sw-color" style="background:#1A3A5C"></div>
+        <div class="sw-info">
+          <div class="sw-name">品牌蓝 Brand Blue</div>
+          <div class="sw-hex">#1A3A5C</div>
+          <div class="sw-use">标题 / 品牌标识</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="sw-color" style="background:#2D5F8A"></div>
+        <div class="sw-info">
+          <div class="sw-name">中蓝 Mid Blue</div>
+          <div class="sw-hex">#2D5F8A</div>
+          <div class="sw-use">辅助标签 / 信息色</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="sw-color" style="background:#E3EDF6"></div>
+        <div class="sw-info">
+          <div class="sw-name">浅蓝 Light Blue</div>
+          <div class="sw-hex">#E3EDF6</div>
+          <div class="sw-use">浅色区块背景</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="sw-color" style="background:#C8963E"></div>
+        <div class="sw-info">
+          <div class="sw-name">品牌金 Brand Gold</div>
+          <div class="sw-hex">#C8963E</div>
+          <div class="sw-use">强调色 / 唯一点缀色</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="sw-color" style="background:#F8F0E0"></div>
+        <div class="sw-info">
+          <div class="sw-name">金色浅底 Gold Bg</div>
+          <div class="sw-hex">#F8F0E0</div>
+          <div class="sw-use">金色区块底色</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="sw-color" style="background:#1E293B"></div>
+        <div class="sw-info">
+          <div class="sw-name">文字黑 Text</div>
+          <div class="sw-hex">#1E293B</div>
+          <div class="sw-use">正文文字</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="sw-color" style="background:#64748B"></div>
+        <div class="sw-info">
+          <div class="sw-name">辅助灰 Sub Text</div>
+          <div class="sw-hex">#64748B</div>
+          <div class="sw-use">次级文字</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="sw-color" style="background:#94A3B8"></div>
+        <div class="sw-info">
+          <div class="sw-name">浅灰 Faint</div>
+          <div class="sw-hex">#94A3B8</div>
+          <div class="sw-use">三级文字 / 水印</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="sw-color" style="background:#E2E8F0"></div>
+        <div class="sw-info">
+          <div class="sw-name">边框灰 Border</div>
+          <div class="sw-hex">#E2E8F0</div>
+          <div class="sw-use">分割线 / 卡片边框</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TYPOGRAPHY ==================== -->
+  <div class="sec">
+    <h2><span>03</span>字体层级</h2>
+
+    <div class="font-sample">
+      <div class="fs-label">一级标题 · PingFang SC Bold 800 · 40pt · letter-spacing 4px</div>
+      <div class="fs-display">欢迎加入元保</div>
+    </div>
+
+    <div class="font-sample">
+      <div class="fs-label">二级标题 · PingFang SC Bold 800 · 22pt · letter-spacing 2-6px</div>
+      <div class="fs-title">元保AI行政服务台</div>
+    </div>
+
+    <div class="font-sample">
+      <div class="fs-label">正文 · PingFang SC Regular 400 · 13-14pt · line-height 1.6</div>
+      <div class="fs-body">很高兴与你成为「保贝」。从这里开始，一起用科技力量守护千万家庭。</div>
+    </div>
+
+    <div class="font-sample">
+      <div class="fs-label">辅助文字 · PingFang SC Regular/Medium · 9-10pt</div>
+      <div class="fs-small">持牌保险专家 · Yuanbao Inc. · NASDAQ 上市</div>
+    </div>
+
+    <p style="font-size:12px; color:var(--faint); margin-top:8px;">
+      备选字体: Microsoft YaHei / Noto Sans SC（印刷厂无 PingFang SC 时）
+    </p>
+  </div>
+
+  <!-- ==================== LAYOUT ==================== -->
+  <div class="sec">
+    <h2><span>04</span>版面结构</h2>
+
+    <div class="layout-preview">
+      <div class="layout-card">
+        <div class="lp-title">正面 · 欢迎 + 企业文化</div>
+        <div class="lp-row"><span class="lp-accent">4mm</span> 品牌色渐变顶条</div>
+        <div class="lp-row"><span class="lp-box">元 保</span> <span class="lp-box">持牌保险专家</span></div>
+        <div class="lp-row" style="margin-top:8px;"><span class="lp-gold">WELCOME</span></div>
+        <div class="lp-row"><span style="font-size:14px; font-weight:800;">欢迎加入元保</span></div>
+        <div class="lp-row" style="color:var(--faint);">很高兴与你成为「保贝」</div>
+        <div class="lp-row" style="margin-top:8px; font-weight:600;">核心价值观</div>
+        <div class="lp-row">
+          <span class="lp-box">用户至上</span> <span class="lp-box">科技驱动</span> <span class="lp-box">简单高效</span>
+        </div>
+        <div class="lp-row">
+          <span class="lp-box">合作共赢</span> <span class="lp-box">拥抱变化</span> <span class="lp-box">诚信担当</span>
+        </div>
+        <div class="lp-row" style="margin-top:8px;">┃ 以科技力量，让每个人都能获得安心保障</div>
+        <div class="lp-row" style="margin-top:12px; justify-content:space-between;">
+          <span>元保集团 <span class="lp-accent">NASDAQ</span></span>
+          <span>入职日期 __年__月__日</span>
+        </div>
+      </div>
+
+      <div class="layout-card">
+        <div class="lp-title">背面 · 元保AI行政服务台</div>
+        <div class="lp-row"><span class="lp-accent">4mm</span> 品牌色渐变顶条</div>
+        <div class="lp-row"><span class="lp-gold">智能行政解决方案</span></div>
+        <div class="lp-row"><span style="font-size:14px; font-weight:800;">元保AI行政服务台</span></div>
+        <div class="lp-row" style="color:var(--faint);">
+          7x24 小时在线，<br>覆盖行政、IT等全场景，答你所问。
+        </div>
+        <div class="lp-row" style="margin-top:8px;">
+          <span class="lp-box" style="background:var(--deep); color:#fff; width:100%; text-align:center;">
+            飞书内搜索「元保AI行政服务台」开启对话
+          </span>
+        </div>
+        <div class="lp-row" style="margin-top:6px; font-weight:600;">服务范围</div>
+        <div class="lp-row">
+          <span class="lp-box">员工福利</span> <span class="lp-box">IT服务</span> <span class="lp-box">物品领用</span>
+        </div>
+        <div class="lp-row">
+          <span class="lp-box">出行停车</span> <span class="lp-box">报销</span> <span class="lp-box">访客接待</span>
+        </div>
+        <div class="lp-row">
+          <span class="lp-box">快递服务</span> <span class="lp-box">母婴室</span> <span class="lp-box">报修服务</span>
+        </div>
+        <div class="lp-row" style="margin-top:8px;">
+          <span class="lp-box" style="font-size:10px;">
+            直接问我 WiFi密码 / 怎么报销 / 工位报修 ...
+          </span>
+        </div>
+        <div class="lp-row" style="margin-top:12px; justify-content:space-between;">
+          <span>官网 yb-inc.com</span>
+          <span>Yuanbao Inc.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== COMPONENTS ==================== -->
+  <div class="sec">
+    <h2><span>05</span>组件清单</h2>
+    <table class="spec-tbl">
+      <thead><tr><th>组件</th><th>规格</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>品牌渐变条</td><td>4mm 高, 深蓝->品牌蓝->金 渐变</td><td>正反面顶部统一使用</td></tr>
+        <tr><td>品牌文字 Logo</td><td>22pt / Bold 800 / letter-spacing 6px</td><td>「元 保」+ 英文副标</td></tr>
+        <tr><td>标签 Pill</td><td>9pt / 边框 1px / padding 4px 12px</td><td>「持牌保险专家」</td></tr>
+        <tr><td>愿景标签</td><td>10pt / 金色 / letter-spacing 3px</td><td>小号大写金色提示</td></tr>
+        <tr><td>核心价值观卡片</td><td>3x2 Grid / 4px 圆角 / 带色点</td><td>6 项价值观, 色点交替</td></tr>
+        <tr><td>使命引文</td><td>左边框 3px 金 / 浅蓝渐变背景</td><td>斜体引用文</td></tr>
+        <tr><td>搜索指引</td><td>深蓝底 / 白色文字 / 搜索图标</td><td>飞书搜索引导</td></tr>
+        <tr><td>服务范围网格</td><td>3x3 Grid / 9 项服务</td><td>灰色卡片 + 图标</td></tr>
+        <tr><td>对话示例</td><td>浅灰底卡片 + 蓝色标签</td><td>高频问题快捷入口</td></tr>
+        <tr><td>底部信息栏</td><td>1px 上边框 / 两端对齐</td><td>官网 / 版权信息</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== DESIGN RULES ==================== -->
+  <div class="sec">
+    <h2><span>06</span>设计约束</h2>
+    <table class="spec-tbl">
+      <thead><tr><th>规则</th><th>约束</th></tr></thead>
+      <tbody>
+        <tr><td>强调色</td><td>仅使用品牌金 #C8963E 作为点缀色，不引入其他高饱和色</td></tr>
+        <tr><td>圆角</td><td>全局统一 4px，不做混搭</td></tr>
+        <tr><td>阴影</td><td>不使用纯黑投影，不滥用卡片阴影</td></tr>
+        <tr><td>分隔</td><td>优先使用细线和间距代替阴影卡片</td></tr>
+        <tr><td>渐变</td><td>仅在顶部色条和搜索区域使用品牌色渐变</td></tr>
+        <tr><td>字体</td><td>全页使用 PingFang SC 单一字体家族</td></tr>
+        <tr><td>Emoji</td><td>仅服务标签使用，标题正文不使用</td></tr>
+        <tr><td>信息层级</td><td>品牌标识 > 标题 > 正文 > 辅助文字</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    元保集团 · 行政部 | 提供给设计部门 | 版本 v3.0 | 2026-07-05
+  </div>
+
+</div>
+</body>
+</html>
