@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>元保 · 新员工入职卡片 · v3</title>
+<style>
+  /* ============================================================
+     元保入职卡片 - 设计系统 v3
+     Brand: 元保 Yuanbao Inc. (NASDAQ)
+     Palette: Deep Blue #15273F / Brand Blue #1A3A5C
+              Gold #C8963E / Slate #64748B
+     Print: A5 148x210mm, 300g copperplate, matte lamination
+     ============================================================ */
+  @page { size: A5; margin: 0; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --deep:    #15273F;
+    --blue:    #1A3A5C;
+    --mid:     #2D5F8A;
+    --light:   #E3EDF6;
+    --gold:    #C8963E;
+    --gold-bg: #F8F0E0;
+    --text:    #1E293B;
+    --sub:     #64748B;
+    --faint:   #94A3B8;
+    --bg:      #FFFFFF;
+    --warm:    #F8FAFC;
+    --border:  #E2E8F0;
+  }
+
+  body {
+    font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,sans-serif;
+    background: #EDF1F7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    padding: 48px 24px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .card {
+    width: 148mm;
+    height: 210mm;
+    background: var(--bg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05), 0 16px 48px rgba(0,0,0,.08);
+  }
+
+  /* ============================================================
+     FRONT - Welcome + Culture
+     ============================================================ */
+
+  .front-top-accent {
+    height: 4px;
+    background: linear-gradient(90deg, var(--deep) 0%, var(--blue) 55%, var(--gold) 100%);
+    flex-shrink: 0;
+  }
+
+  /* Hero strip */
+  .front-hero {
+    padding: 0 36px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .front-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 28px;
+  }
+
+  .logo-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .logo-cn {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: 6px;
+    line-height: 1;
+  }
+
+  .logo-en {
+    font-size: 8.5px;
+    font-weight: 500;
+    color: var(--faint);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .tag-pill {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--sub);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    align-self: flex-start;
+  }
+
+  /* Welcome */
+  .welcome-area {
+    padding: 44px 36px 0;
+    flex-shrink: 0;
+  }
+
+  .welcome-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 3px;
+  }
+
+  .welcome-main {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: 4px;
+    line-height: 1.12;
+    margin-top: 6px;
+  }
+
+  .welcome-msg {
+    font-size: 14px;
+    color: var(--sub);
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  /* Values */
+  .values-block {
+    margin: 40px 36px 0;
+    flex-shrink: 0;
+  }
+
+  .values-head {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--mid);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .values-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .value-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--warm);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .value-card .v-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .value-card .v-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .d-gold  { background: var(--gold); }
+  .d-blue  { background: var(--mid); }
+  .d-deep  { background: var(--deep); }
+
+  /* Mission */
+  .mission-strip {
+    margin: 30px 36px 0;
+    padding: 18px 24px;
+    border-left: 3px solid var(--gold);
+    background: linear-gradient(135deg, var(--light) 0%, transparent 70%);
+    flex-shrink: 0;
+  }
+
+  .mission-strip .m-label {
+    font-size: 13px;
+    color: var(--sub);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .mission-strip .m-label strong {
+    color: var(--blue);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* Footer */
+  .front-foot {
+    margin-top: auto;
+    padding: 16px 36px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .foot-company {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--faint);
+  }
+
+  .nasdaq-mark {
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--deep);
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+
+  .foot-date {
+    font-size: 10px;
+    color: var(--faint);
+    letter-spacing: 1px;
+  }
+
+  /* ============================================================
+     BACK - AI Admin Service Desk
+     ============================================================ */
+
+  .back-top-accent {
+    height: 4px;
+    background: linear-gradient(90deg, var(--deep) 0%, var(--blue) 40%, var(--gold) 100%);
+    flex-shrink: 0;
+  }
+
+  .back-head {
+    padding: 28px 36px 0;
+    flex-shrink: 0;
+  }
+
+  .back-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+
+  .back-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: 2px;
+    margin-top: 6px;
+    line-height: 1.2;
+  }
+
+  .back-desc {
+    font-size: 13px;
+    color: var(--sub);
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  /* Search instruction (replaces QR) */
+  .search-callout {
+    margin: 20px 36px 0;
+    background: linear-gradient(135deg, var(--blue), var(--deep));
+    border-radius: 8px;
+    padding: 20px 24px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .search-callout .s-step {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,.6);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .search-callout .s-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .search-icon-box {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,.12);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .search-icon-box svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .search-callout .s-body {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .search-callout .s-body .highlight {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .search-callout .s-hint {
+    font-size: 11px;
+    color: rgba(255,255,255,.55);
+    margin-top: 8px;
+  }
+
+  /* Services */
+  .svc-section {
+    margin: 20px 36px 0;
+    flex-shrink: 0;
+  }
+
+  .svc-head {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--mid);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .svc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+  }
+
+  .svc-cell {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    background: var(--warm);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .svc-cell .sc-icon {
+    font-size: 14px;
+    width: 22px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  /* Chat bubble */
+  .chat-area {
+    margin: 18px 36px 0;
+    flex-shrink: 0;
+  }
+
+  .chat-bubble {
+    background: var(--warm);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .chat-bubble strong {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .chat-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .chat-pill {
+    font-size: 10px;
+    color: var(--mid);
+    background: var(--light);
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  /* Footer */
+  .back-foot {
+    margin-top: auto;
+    padding: 16px 36px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .bf-site {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    color: var(--faint);
+  }
+
+  .bf-url {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: 1px;
+  }
+
+  .bf-copy {
+    font-size: 9px;
+    color: var(--faint);
+  }
+
+  /* ============================================================
+     UTILITY
+     ============================================================ */
+
+  .sec-label {
+    text-align: center;
+    font-size: 12px;
+    color: var(--faint);
+    font-weight: 600;
+    letter-spacing: 3px;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; gap: 0; }
+    .card { box-shadow: none; page-break-after: always; }
+    .card:last-child { page-break-after: avoid; }
+    .sec-label { display: none; }
+    .print-zone { display: none; }
+  }
+
+  .print-zone {
+    text-align: center;
+    margin: 8px 0 40px;
+  }
+
+  .print-btn {
+    padding: 12px 36px;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-family: inherit;
+  }
+
+  .print-btn:hover { background: var(--deep); }
+
+  .print-meta {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--faint);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== FRONT ==================== -->
+<div class="sec-label">正面 · 欢迎 & 企业文化</div>
+
+<div class="card">
+  <div class="front-top-accent"></div>
+
+  <div class="front-hero">
+    <div class="front-header-row">
+      <div class="logo-block">
+        <span class="logo-cn">元 保</span>
+        <span class="logo-en">Yuanbao Inc.</span>
+      </div>
+      <div class="tag-pill">持牌保险专家</div>
+    </div>
+  </div>
+
+  <div class="welcome-area">
+    <div class="welcome-label">WELCOME</div>
+    <div class="welcome-main">欢迎加入<br>元保</div>
+    <div class="welcome-msg">
+      很高兴与你成为「保贝」。<br>
+      从这里开始，一起用科技力量守护千万家庭。
+    </div>
+  </div>
+
+  <div class="values-block">
+    <div class="values-head">核心价值观</div>
+    <div class="values-row">
+      <div class="value-card"><span class="v-dot d-gold"></span><span class="v-label">用户至上</span></div>
+      <div class="value-card"><span class="v-dot d-blue"></span><span class="v-label">科技驱动</span></div>
+      <div class="value-card"><span class="v-dot d-deep"></span><span class="v-label">简单高效</span></div>
+      <div class="value-card"><span class="v-dot d-gold"></span><span class="v-label">合作共赢</span></div>
+      <div class="value-card"><span class="v-dot d-blue"></span><span class="v-label">拥抱变化</span></div>
+      <div class="value-card"><span class="v-dot d-deep"></span><span class="v-label">诚信担当</span></div>
+    </div>
+  </div>
+
+  <div class="mission-strip">
+    <div class="m-label">
+      <strong>我们的使命</strong><br>
+      以科技力量，让每个人都能获得安心保障。
+    </div>
+  </div>
+
+  <div class="front-foot">
+    <div class="foot-company">
+      <span>元保集团</span>
+      <span class="nasdaq-mark">NASDAQ</span>
+    </div>
+    <div class="foot-date">入职日期 ________ 年 ______ 月 ______ 日</div>
+  </div>
+</div>
+
+<!-- ==================== BACK ==================== -->
+<div class="sec-label">背面 · 元保AI行政服务台</div>
+
+<div class="card">
+  <div class="back-top-accent"></div>
+
+  <div class="back-head">
+    <div class="back-eyebrow">智能行政解决方案</div>
+    <div class="back-title">元保AI行政服务台</div>
+    <div class="back-desc">
+      7x24 小时在线，<br>
+      覆盖行政、IT等全场景，答你所问。
+    </div>
+  </div>
+
+  <!-- Search callout - NO QR -->
+  <div class="search-callout">
+    <div class="s-step">飞书内搜索</div>
+    <div class="s-main">
+      <div class="search-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <div>
+        <div class="s-body">
+          搜索 <span class="highlight">「元保AI行政服务台」</span>
+        </div>
+        <div class="s-hint">开启对话，随时随地秒问秒答</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-section">
+    <div class="svc-head">服务范围</div>
+    <div class="svc-grid">
+      <div class="svc-cell"><span class="sc-icon">&#x1F3E0;</span> 员工福利</div>
+      <div class="svc-cell"><span class="sc-icon">&#x1F5A5;</span> IT 服务</div>
+      <div class="svc-cell"><span class="sc-icon">&#x1F4E6;</span> 物品领用</div>
+      <div class="svc-cell"><span class="sc-icon">&#x1F697;</span> 出行停车</div>
+      <div class="svc-cell"><span class="sc-icon">&#x1F4B0;</span> 报销相关</div>
+      <div class="svc-cell"><span class="sc-icon">&#x1F4CB;</span> 访客接待</div>
+      <div class="svc-cell"><span class="sc-icon">&#x1F4EE;</span> 快递服务</div>
+      <div class="svc-cell"><span class="sc-icon">&#x1F476;</span> 母婴室</div>
+      <div class="svc-cell"><span class="sc-icon">&#x1F527;</span> 报修服务</div>
+    </div>
+  </div>
+
+  <div class="chat-area">
+    <div class="chat-bubble">
+      <strong>直接问我</strong> WiFi密码是什么 / 怎么报销 / 工位报修 / 停车位办理 / 办公用品哪里领
+    </div>
+    <div class="chat-pills">
+      <span class="chat-pill">WiFi 密码</span>
+      <span class="chat-pill">怎么报销</span>
+      <span class="chat-pill">工位报修</span>
+      <span class="chat-pill">领办公用品</span>
+      <span class="chat-pill">停车位</span>
+      <span class="chat-pill">打印机安装</span>
+      <span class="chat-pill">会议准备</span>
+    </div>
+  </div>
+
+  <div class="back-foot">
+    <div class="bf-site">
+      <span>官网</span>
+      <span class="bf-url">yb-inc.com</span>
+    </div>
+    <div class="bf-copy">Yuanbao Inc. All rights reserved.</div>
+  </div>
+</div>
+
+<div class="print-zone">
+  <button class="print-btn" onclick="window.print()">打印设计稿 (A5 双面)</button>
+  <div class="print-meta">
+    印刷参数: A5 148x210mm | 300g 铜版纸 | 双面彩印 | 覆哑膜<br>
+    品牌色: 深蓝 #15273F / 品牌蓝 #1A3A5C / 金 #C8963E / 辅灰 #64748B
+  </div>
+</div>
+
+</body>
+</html>

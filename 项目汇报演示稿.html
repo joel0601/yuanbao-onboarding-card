@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>元保 · 新员工入职卡片 · 项目汇报</title>
+<style>
+  /* ============================================================
+     元保 项目汇报演示稿
+     Brand: 元保 Yuanbao Inc. (NASDAQ)
+     Palette: Deep Blue #15273F / Brand Blue #1A3A5C
+              Gold #C8963E / Slate #475569
+     ============================================================ */
+  :root {
+    --deep:   #15273F;
+    --blue:   #1A3A5C;
+    --mid:    #2563EB;
+    --gold:   #C8963E;
+    --gold-l: #FEF3C7;
+    --text:   #1E293B;
+    --sub:    #475569;
+    --faint:  #94A3B8;
+    --bg:     #F8FAFC;
+    --white:  #FFFFFF;
+    --border: #E2E8F0;
+    --green:  #059669;
+    --red:    #DC2626;
+    --amber:  #D97706;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,sans-serif;
+    background: #F1F5F9;
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Page wrapper */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* Cover */
+  .cover {
+    background: linear-gradient(160deg, var(--deep) 0%, var(--blue) 60%, #1e4d7a 100%);
+    color: #fff;
+    border-radius: 8px;
+    padding: 64px 48px;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,.03);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .cover-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+
+  .cover-title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,.7);
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+    color: rgba(255,255,255,.5);
+  }
+
+  /* Section */
+  .section {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 36px 40px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .section-title .num {
+    color: var(--gold);
+    font-weight: 800;
+    margin-right: 6px;
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--sub);
+    margin-top: 16px;
+    margin-bottom: 12px;
+  }
+
+  /* Info cards */
+  .info-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .info-card {
+    background: var(--bg);
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .info-card .ic-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--sub);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .info-card .ic-value {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* Strategy quad */
+  .quad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .quad-item {
+    background: var(--bg);
+    padding: 16px 18px;
+    border-radius: 6px;
+    border-left: 3px solid var(--blue);
+  }
+
+  .quad-item.qi-gold { border-left-color: var(--gold); }
+
+  .quad-item .qi-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 4px;
+  }
+
+  .quad-item .qi-body {
+    font-size: 12px;
+    color: var(--sub);
+    line-height: 1.5;
+  }
+
+  /* Tables */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+
+  .data-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--sub);
+    font-size: 11px;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* Timeline */
+  .timeline {
+    margin-top: 16px;
+  }
+
+  .tl-phase {
+    margin-bottom: 20px;
+  }
+
+  .tl-phase-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .tl-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--blue);
+    flex-shrink: 0;
+  }
+
+  .tl-dot.tl-gold { background: var(--gold); }
+  .tl-dot.tl-green { background: var(--green); }
+  .tl-dot.tl-mid { background: var(--mid); }
+
+  .tl-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+  }
+
+  .tl-week {
+    font-size: 11px;
+    color: var(--faint);
+    margin-left: auto;
+  }
+
+  .tl-items {
+    margin-left: 24px;
+    padding-left: 16px;
+    border-left: 2px solid var(--border);
+  }
+
+  .tl-item {
+    font-size: 12px;
+    color: var(--sub);
+    padding: 3px 0;
+  }
+
+  /* Risk tags */
+  .risk-high { background: #FEE2E2; color: var(--red); padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+  .risk-mid  { background: #FEF3C7; color: var(--amber); padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+  .risk-low  { background: #D1FAE5; color: var(--green); padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+
+  /* Quote */
+  .quote-block {
+    background: linear-gradient(135deg, #EFF6FF, #F8FAFC);
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* Budget */
+  .budget-total {
+    text-align: right;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--blue);
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 2px solid var(--border);
+  }
+
+  /* Check list */
+  .check-list {
+    list-style: none;
+    margin-top: 12px;
+  }
+
+  .check-list li {
+    padding: 6px 0;
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .check-icon {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .doc-footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--faint);
+    padding: 32px 0 16px;
+  }
+
+  /* Print */
+  @media print {
+    body { background: #fff; }
+    .page { max-width: 100%; padding: 0; }
+    .section { box-shadow: none; break-inside: avoid; }
+    .cover { break-after: page; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ==================== COVER ==================== -->
+  <div class="cover">
+    <div class="cover-label">PROJECT PROPOSAL</div>
+    <div class="cover-title">「新员工入职卡片」<br>项目执行方案</div>
+    <div class="cover-sub">
+      入职触点优化 + 元保AI行政服务台推广 + 行政部门影响力提升
+    </div>
+    <div class="cover-meta">
+      <span>编制: 行政部</span>
+      <span>日期: 2026年7月5日</span>
+      <span>版本: v3.0</span>
+    </div>
+  </div>
+
+  <!-- ==================== 1. BACKGROUND ==================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">01</span>项目背景与战略价值</div>
+
+    <div class="info-row">
+      <div class="info-card">
+        <div class="ic-label">公司背景</div>
+        <div class="ic-value">
+          元保（Yuanbao Inc.）是国内领先互联网保险科技平台，2025年4月纳斯达克上市，累计服务超千万家庭，定位「持牌保险专家」。
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">项目背景</div>
+        <div class="ic-value">
+          新员工入职时获赠品牌文件袋（A5笔记本、签字笔、便利贴、鼠标垫），缺少承载企业文化与行政服务引导的卡片。本项目填补这一触点空白。
+        </div>
+      </div>
+    </div>
+
+    <div class="section-sub">战略定位</div>
+    <div class="quad-grid">
+      <div class="quad-item">
+        <div class="qi-head">行政部视角</div>
+        <div class="qi-body">将「元保AI行政服务台」嵌入新员工第一天，培养使用习惯，降低重复咨询人力成本。</div>
+      </div>
+      <div class="quad-item qi-gold">
+        <div class="qi-head">员工体验</div>
+        <div class="qi-body">入职第一触点即感知公司文化和行政服务温度，提升新员工满意度。</div>
+      </div>
+      <div class="quad-item qi-gold">
+        <div class="qi-head">部门影响力</div>
+        <div class="qi-body">从「被动响应」升级为「主动服务设计」，彰显行政部门价值。</div>
+      </div>
+      <div class="quad-item">
+        <div class="qi-head">个人发展</div>
+        <div class="qi-body">季度重点项目，体现项目管理、跨部门协同、设计思维等核心能力。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. GOALS ==================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">02</span>项目目标 (SMART)</div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>目标</th><th>衡量标准</th><th>时间节点</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>入职卡片设计定稿</td><td>设计稿通过管理层审核</td><td>第 2 周</td></tr>
+        <tr><td>首批 200 份卡片交付</td><td>实物印刷完成并入库</td><td>第 3 周</td></tr>
+        <tr><td>新员工服务台激活率</td><td>大于等于 80% 新员工入职 3 日内首次使用</td><td>持续追踪</td></tr>
+        <tr><td>行政重复咨询量下降</td><td>同比降低 30%</td><td>上线后 1 个月</td></tr>
+        <tr><td>新员工满意度</td><td>入职满意度调查大于等于 4.5/5</td><td>每季度评估</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== 3. CARD CONTENT ==================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">03</span>卡片内容策略</div>
+
+    <div class="info-row">
+      <div class="info-card">
+        <div class="ic-label">正面: 欢迎 + 企业文化</div>
+        <div class="ic-value" style="font-size:12px;">
+          元保 Logo + 「欢迎加入元保」大标题<br>
+          「保贝」称呼吸应公司文化<br>
+          六大核心价值观卡片式展示<br>
+          使命金句 + NASDAQ 标识<br>
+          入职日期留白填写区
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">背面: 元保AI行政服务台</div>
+        <div class="ic-value" style="font-size:12px;">
+          元保AI行政服务台 主视觉<br>
+          飞书内搜索引导（无二维码）<br>
+          九宫格服务导航<br>
+          对话示例标签<br>
+          官网: yb-inc.com
+        </div>
+      </div>
+    </div>
+
+    <div class="section-sub">设计原则 (design-taste-frontend)</div>
+    <div class="quad-grid">
+      <div class="quad-item"><div class="qi-head">单强调色</div><div class="qi-body">品牌金 #C8963E 为唯一强调色</div></div>
+      <div class="quad-item qi-gold"><div class="qi-head">形状一致</div><div class="qi-body">全局 4px 圆角,不做混搭</div></div>
+      <div class="quad-item qi-gold"><div class="qi-head">零 AI 痕迹</div><div class="qi-body">无紫色渐变,无装饰性元素</div></div>
+      <div class="quad-item"><div class="qi-head">信息层级</div><div class="qi-body">品牌 > 标题 > 正文 > 辅助,权重逐级递减</div></div>
+    </div>
+  </div>
+
+  <!-- ==================== 4. TIMELINE ==================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">04</span>执行计划</div>
+
+    <div class="timeline">
+      <div class="tl-phase">
+        <div class="tl-phase-header">
+          <div class="tl-dot tl-gold"></div>
+          <div class="tl-label">需求确认</div>
+          <div class="tl-week">Week 1</div>
+        </div>
+        <div class="tl-items">
+          <div class="tl-item">与管理层对齐卡片定位</div>
+          <div class="tl-item">确认企业文化文案（对接 HR/PR）</div>
+          <div class="tl-item">确认 AI 服务台功能列表</div>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-phase-header">
+          <div class="tl-dot"></div>
+          <div class="tl-label">设计阶段</div>
+          <div class="tl-week">Week 2</div>
+        </div>
+        <div class="tl-items">
+          <div class="tl-item">视觉初稿（3 方案）</div>
+          <div class="tl-item">内部评审（行政组）</div>
+          <div class="tl-item">管理层审核定稿</div>
+          <div class="tl-item">印刷厂对接打样</div>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-phase-header">
+          <div class="tl-dot tl-green"></div>
+          <div class="tl-label">生产交付</div>
+          <div class="tl-week">Week 3</div>
+        </div>
+        <div class="tl-items">
+          <div class="tl-item">首批 200 张印刷</div>
+          <div class="tl-item">质量验收入库</div>
+          <div class="tl-item">通知 HR 同步启用</div>
+        </div>
+      </div>
+
+      <div class="tl-phase">
+        <div class="tl-phase-header">
+          <div class="tl-dot tl-mid"></div>
+          <div class="tl-label">持续优化</div>
+          <div class="tl-week">Week 4+</div>
+        </div>
+        <div class="tl-items">
+          <div class="tl-item">收集新员工反馈</div>
+          <div class="tl-item">月度使用数据追踪</div>
+          <div class="tl-item">v2 迭代优化</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 5. STAKEHOLDERS ==================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">05</span>关键干系人与协作</div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>干系人 / 部门</th><th>角色</th><th>协作内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>行政部负责人</td><td>项目 Sponsor</td><td>资源审批、方向把控</td></tr>
+        <tr><td>HR 部门（陶然）</td><td>协作方</td><td>企业文化文案审核、入职流程衔接</td></tr>
+        <tr><td>品牌 / PR 部门</td><td>协作方</td><td>Logo 使用规范、VI 一致性审核</td></tr>
+        <tr><td>IT 组（孙福玉 / 段超）</td><td>协作方</td><td>飞书机器人对接</td></tr>
+        <tr><td>行政组（刘艺璇 / 王子涵 / 郭文畅）</td><td>执行方</td><td>内容校对、知识库维护</td></tr>
+        <tr><td>印刷供应商</td><td>外部</td><td>打样、生产、质量控制</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== 6. RISKS ==================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">06</span>风险预案</div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>风险</th><th>概率</th><th>影响</th><th>应对方案</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>企业文化文案未及时确认</td>
+          <td><span class="risk-mid">中</span></td>
+          <td><span class="risk-high">高</span></td>
+          <td>提前 2 周与 HR 锁定；备选简化版文案</td>
+        </tr>
+        <tr>
+          <td>飞书机器人配置变更</td>
+          <td><span class="risk-low">低</span></td>
+          <td><span class="risk-high">高</span></td>
+          <td>仅使用搜索名称进入，无硬编码链接依赖</td>
+        </tr>
+        <tr>
+          <td>印刷色差 / 质量问题</td>
+          <td><span class="risk-mid">中</span></td>
+          <td><span class="risk-mid">中</span></td>
+          <td>要求供应商先出数码样，现场签样后再批量</td>
+        </tr>
+        <tr>
+          <td>新员工使用率不达预期</td>
+          <td><span class="risk-mid">中</span></td>
+          <td><span class="risk-high">高</span></td>
+          <td>在入职培训中加入 2 分钟演示环节，HR 配合引导</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== 7. PRESENTATION ==================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">07</span>汇报方案 (15分钟)</div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>环节</th><th>时长</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>背景与痛点</td><td>2min</td><td>新员工入职体验缺失、行政咨询重复量大</td></tr>
+        <tr><td>方案展示</td><td>5min</td><td>卡片设计稿 + 实物效果</td></tr>
+        <tr><td>数据预估</td><td>3min</td><td>预期降低行政工作量、提升满意度</td></tr>
+        <tr><td>执行时间线</td><td>2min</td><td>关键里程碑与交付节点</td></tr>
+        <tr><td>资源需求</td><td>2min</td><td>预算约 1,000 元、人力 1 人</td></tr>
+        <tr><td>下一步行动</td><td>1min</td><td>请求审批定稿、启动印刷</td></tr>
+      </tbody>
+    </table>
+
+    <div class="quote-block">
+      「新员工入职第一天，是我们建立行政服务印象的最佳窗口。通过一张精心设计的入职卡片，我们不仅传递企业文化温度，更重要的是 - 让每位新保贝从第一天就养成使用元保AI行政服务台的习惯。这不仅减少了行政团队的重复答疑工作量，更是行政部门从'被动响应'转型'主动服务设计'的标志性实践。」
+    </div>
+  </div>
+
+  <!-- ==================== 8. BUDGET ==================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">08</span>预算明细</div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>项目</th><th>规格</th><th>数量</th><th>单价</th><th>小计</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>入职卡片设计</td><td>专业设计 + 打样</td><td>1 套</td><td>0 (内部)</td><td>0</td></tr>
+        <tr><td>卡片印刷</td><td>300g 铜版纸, 双面彩印</td><td>500 张</td><td>1.5</td><td>750</td></tr>
+        <tr><td>覆膜工艺</td><td>哑膜</td><td>500 张</td><td>0.5</td><td>250</td></tr>
+      </tbody>
+    </table>
+
+    <div class="budget-total">合计: 约 1,000 元</div>
+  </div>
+
+  <!-- ==================== 9. SUCCESS ==================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">09</span>成功标准与后续迭代</div>
+
+    <div class="section-sub" style="font-weight:700; font-size:14px;">V1.0 成功标准</div>
+    <ul class="check-list">
+      <li><span class="check-icon">&#x2713;</span> 卡片通过管理层审批</li>
+      <li><span class="check-icon">&#x2713;</span> 首批 200 张按时交付</li>
+      <li><span class="check-icon">&#x2713;</span> 新员工入职流程中纳入卡片发放环节</li>
+      <li><span class="check-icon">&#x2713;</span> 元保AI行政服务台激活率大于等于 80%</li>
+    </ul>
+
+    <div class="section-sub" style="font-weight:700; font-size:14px;">V2.0 迭代方向</div>
+    <div class="quad-grid">
+      <div class="quad-item"><div class="qi-head">飞书小程序化</div><div class="qi-body">以飞书小程序补充实体卡片</div></div>
+      <div class="quad-item qi-gold"><div class="qi-head">入职任务打卡</div><div class="qi-body">引导式体验新员工入职流程</div></div>
+      <div class="quad-item qi-gold"><div class="qi-head">新人 FAQ Top 10</div><div class="qi-body">加入高频问题快速索引</div></div>
+      <div class="quad-item"><div class="qi-head">多语言版本</div><div class="qi-body">如有外籍员工需求</div></div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    元保集团 · 行政部 | 2026年7月5日 | 版本 v3.0
+  </div>
+
+</div>
+</body>
+</html>
